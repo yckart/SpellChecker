@@ -7,8 +7,8 @@
 var dict = "Foo bar is not equal to bar foo."; // can also be an array
 var spell = new SpellChecker(dict);
 
-console.log( spell.correct("egual") ); // "equal"
-console.log( spell.correct("foz") ); // "foo"
+console.log( spell.correct("egual") ); // ["equal"]
+console.log( spell.correct("foz") ); // ["foo"]
 ```
 
 ## Download

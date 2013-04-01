@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width'>
+
+    <style>
+        abbr {
+            cursor: pointer;
+            border-bottom: 1px dotted #f00
+        }
+    </style>
+
+    <title>JS: Spellchecker - jsFiddle demo by ARTsinn</title>
+
+</head>
+<body>
+    <p id='div'>Foo ba ris not egual to bar foo.</p>
+    <button>Correct</button>
+
+
+    <script src='../index.js'></script>
+    <script>
+        var dict = "Foo bar is not equal to bar foo.";
+        var spell = new SpellChecker(dict);
+
+
+        Node.prototype.check = function (all) {
+            this.innerHTML = this.innerText.replace(/[A-z]+/g, function (word) {
+                var corrected = spell.correct(word);
+                return !all ? (corrected !== word ? "<abbr title=" + corrected + ">" + word + "</abbr>" : word) : corrected;
+            });
+            return this;
+        };
+
+        var div = document.getElementById("div").check(),
+            button = document.getElementsByTagName("button"),
+            abbr = div.getElementsByTagName("abbr"),
+            i = abbr.length;
+
+        while(i--)
+        abbr[i].onclick = function () {
+            this.outerHTML = spell.correct(this.innerText);
+        };
+
+        button[0].onclick =function () {
+            div.check(true);
+        };
+
+    </script>
+</body>
+</html>
